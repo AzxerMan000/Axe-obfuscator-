@@ -1,68 +1,158 @@
+:root {
+    --primary-color: #007bff;
+    --success-color: #28a745;
+    --background-color: #f8f9fa;
+    --card-color: #ffffff;
+    --text-color: #343a40;
+    --border-color: #dee2e6;
+    --monospace-font: 'Consolas', 'Courier New', monospace;
+}
+
 body {
-    /* INTER FONT APPLIED HERE */
     font-family: 'Inter', sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 20px;
+    padding: 40px 20px;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
 }
 
 .container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 1200px;
+    background-color: var(--card-color);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1300px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 h1 {
-    text-align: center;
-    color: #007bff;
-    font-weight: 800; /* Use a heavier weight for the heading */
+    color: var(--primary-color);
+    font-weight: 800; 
+    margin-bottom: 5px;
 }
 
-/* ... (other styling remains the same) ... */
+.note {
+    font-size: 0.9em;
+    color: #6c757d;
+}
 
+/* --- Input/Output Sections --- */
 .io-container {
     display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 25px;
+    margin-bottom: 25px;
 }
 
-.input-section, .output-section {
+.code-section {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1.1em;
 }
 
 textarea {
     width: 100%;
     height: 400px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    /* Keep a monospace font for code readability */
-    font-family: 'Consolas', 'Courier New', monospace; 
-    font-size: 14px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: var(--monospace-font);
+    font-size: 15px;
     resize: none;
     box-sizing: border-box; 
+    transition: border-color 0.3s;
 }
 
-#obfuscateBtn {
+textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* --- Output Wrapper for Button Positioning --- */
+.output-wrapper {
+    position: relative;
+    flex-grow: 1;
+}
+
+.output-wrapper textarea {
+    padding-right: 120px; /* Space for the copy button */
+}
+
+/* --- Buttons --- */
+.primary-btn {
     display: block;
     width: 100%;
-    padding: 15px;
-    font-size: 18px;
-    background-color: #28a745;
+    padding: 18px;
+    font-size: 1.25em;
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.primary-btn:hover {
+    background-color: #218838;
+}
+
+.utility-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    background-color: #6c757d;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: 600; /* Use a medium weight for the button */
+    font-size: 0.9em;
+    font-weight: 600;
+    z-index: 10;
 }
 
-#obfuscateBtn:hover {
-    background-color: #218838;
+.utility-btn:hover {
+    background-color: #5a6268;
+}
+
+/* --- Feedback Message --- */
+.feedback {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 11;
+}
+
+/* --- Responsiveness for smaller screens --- */
+@media (max-width: 900px) {
+    .io-container {
+        flex-direction: column;
+    }
+    
+    .container {
+        padding: 20px;
+    }
 }
